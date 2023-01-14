@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import { HandThumbUpIcon, HandThumbDownIcon, CurrencyDollarIcon, ForwardIcon, ArrowPathRoundedSquareIcon } from '@heroicons/react/20/solid'
 import { useEffect, useState } from 'react'
-import { resetGame, setGame, calc, getCount } from './function'
-import { data } from 'autoprefixer'
+import { resetGame, setGame, calc } from '../function/function'
 
 const previousBet = [
   { name: 'Previous Bet', stat: '1', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
@@ -91,7 +90,7 @@ export default function Home() {
           </dl>
           <div className='flex items-center justify-center mt-10'>
             <button
-              onClick={() => calc(setData)}
+              onClick={() => calc(setData, true)}
               type="button"
               className="hover:scale-110 transition md:transform-none mr-10 inline-flex items-center rounded-md border border-transparent bg-green-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
             >
@@ -99,7 +98,7 @@ export default function Home() {
               Win
             </button>
             <button
-              onClick={() => calc(setData)}
+              onClick={() => calc(setData, false)}
               type="button"
               className="hover:scale-110 transition md:transform-none inline-flex items-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >

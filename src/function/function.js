@@ -1,5 +1,3 @@
-import { COMPILER_INDEXES } from "next/dist/shared/lib/constants"
-
 export function resetGame(setData) {
     if (typeof window !== "undefined") {
         localStorage.clear()
@@ -17,10 +15,16 @@ export function setGame(setData) {
     }
 }
 
-export function calc(setData) {
+export function calc(setData, win) {
     var data = JSON.parse(localStorage.getItem("data"))
-    console.log("data", data)
     data["count"] = data["count"] += 1
+    console.log("data", data)
+
+    if (win) {
+        
+    }
+
+
     localStorage.setItem("data", JSON.stringify(data))
     setData(data)
 }
