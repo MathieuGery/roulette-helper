@@ -26,7 +26,7 @@ export function calc(setData, win) {
     } else {
         data["bet_value"] =  data["bet_value"] * 2
     }
-
+    data.colors.push(data.colors.shift())
 
     localStorage.setItem("data", JSON.stringify(data))
     setData(data)
