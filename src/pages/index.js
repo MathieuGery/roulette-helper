@@ -2,18 +2,19 @@ import Head from 'next/head'
 import { HandThumbUpIcon, HandThumbDownIcon, CurrencyDollarIcon, ForwardIcon, ArrowPathRoundedSquareIcon } from '@heroicons/react/20/solid'
 import { useEffect, useState } from 'react'
 import { resetGame, setGame, calc, getCount } from './function'
-
-const stats = [
-  { name: 'Bet', stat: '1', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-  { name: 'On color', stat: 'RED', icon: <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-  { name: 'Bet N°', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-]
+import { data } from 'autoprefixer'
 
 const previousBet = [
   { name: 'Previous Bet', stat: '1', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
   { name: 'On previous color', stat: 'RED', icon: <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
   { name: 'Was bet N°', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
 ]
+const stats = [
+  { name: 'Bet', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
+  { name: 'On color', stat: 'RED', icon: <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
+  { name: 'Bet N°', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
+]
+
 
 export default function Home() {
   const [data, setData] = useState({})
@@ -38,29 +39,55 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='flex justify-center h-screen items-center'>
+      <main className='flex justify-center h-screen items-center mx-10'>
         <div>
+          {/* PREVIOUS BET PART */}
           <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-            {previousBet.map((item) => (
-              <div key={item.name} className="overflow-hidden rounded-lg bg-neutral-600 px-4 py-5 shadow sm:p-6">
-                <dt className="truncate text-sm font-medium text-gray-800">{item.name}</dt>
-                <div className='grid grid-cols-2 gap-0'>
-                  {item.icon}
-                  <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{data.count}</dd>
-                </div>
+            <div key="1" className="overflow-hidden rounded-lg bg-neutral-600 px-4 py-5 shadow sm:p-6">
+              <dt className="truncate text-sm font-medium text-gray-800">Previous Bet</dt>
+              <div className='grid grid-cols-2 gap-0'>
+                <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" />
+                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{data.previous_bet_value}</dd>
               </div>
-            ))}
+            </div>
+            <div key="2" className="overflow-hidden rounded-lg bg-neutral-600 px-4 py-5 shadow sm:p-6">
+              <dt className="truncate text-sm font-medium text-gray-800">On previous color</dt>
+              <div className='grid grid-cols-2 gap-0'>
+                <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" />
+                <dd className="mt-1 -ml-2 text-3xl font-semibold tracking-tight text-gray-900">{data.previous_color}</dd>
+              </div>
+            </div>
+            <div key="3" className="overflow-hidden rounded-lg bg-neutral-600 px-4 py-5 shadow sm:p-6">
+              <dt className="truncate text-sm font-medium text-gray-800">Was bet N°</dt>
+              <div className='grid grid-cols-2 gap-0'>
+                <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" />
+                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{data.count - 1}</dd>
+              </div>
+            </div>
           </dl>
+          {/* CURRENT BET PART */}
           <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-            {stats.map((item) => (
-              <div key={item.name} className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-                <dt className="truncate text-sm font-medium text-gray-500">{item.name}</dt>
-                <div className='grid grid-cols-2 gap-0'>
-                  {item.icon}
-                  <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{item.stat}</dd>
-                </div>
+            <div key="1" className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <dt className="truncate text-sm font-medium text-gray-800">Previous Bet</dt>
+              <div className='grid grid-cols-2 gap-0'>
+                <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" />
+                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{data.bet_value}</dd>
               </div>
-            ))}
+            </div>
+            <div key="2" className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <dt className="truncate text-sm font-medium text-gray-800">On previous color</dt>
+              <div className='grid grid-cols-2 gap-0'>
+                <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" />
+                <dd className="mt-1 -ml-2 text-3xl font-semibold tracking-tight text-gray-900">{data.color}</dd>
+              </div>
+            </div>
+            <div key="3" className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+              <dt className="truncate text-sm font-medium text-gray-800">Was bet N°</dt>
+              <div className='grid grid-cols-2 gap-0'>
+                <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" />
+                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{data.count}</dd>
+              </div>
+            </div>
           </dl>
           <div className='flex items-center justify-center mt-10'>
             <button

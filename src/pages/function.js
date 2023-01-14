@@ -9,7 +9,7 @@ export function resetGame(setData) {
 }
 
 export function setGame(setData) {
-    const init_data = {"count": 0}
+    const init_data = {"count": 0, "bet_value": 1, "previous_bet_value": 0, "color": "RED", "previous_color": "BLACK"}
     if (typeof window !== "undefined") {
         console.log("Init")
         localStorage.setItem("data", JSON.stringify(init_data))
