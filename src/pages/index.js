@@ -75,7 +75,7 @@ export default function Home() {
               </div>
             </div>
             <div key="3" className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-              <dt className="truncate text-sm font-medium text-gray-800">Was bet N°</dt>
+              <dt className="truncate text-sm font-medium text-gray-800">Bet N°</dt>
               <div className='grid grid-cols-2 gap-0'>
                 <ArrowTrendingUpIcon className="mt-1 h-9 w-9 text-yellow-500" aria-hidden="true" />
                 <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{data.count}</dd>
