@@ -1,18 +1,35 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import { HandThumbUpIcon, HandThumbDownIcon, CurrencyDollarIcon, ForwardIcon, ArrowPathRoundedSquareIcon } from '@heroicons/react/20/solid'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { resetGame, setGame, calc, getCount } from './function'
 
 const stats = [
-  { name: 'Next Bet', stat: '1', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-  { name: 'Bet on color', stat: 'RED', icon: <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
+  { name: 'Bet', stat: '1', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
+  { name: 'On color', stat: 'RED', icon: <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
   { name: 'Bet N°', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
 ]
 
+const previousBet = [
+  { name: 'Previous Bet', stat: '1', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
+  { name: 'On previous color', stat: 'RED', icon: <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
+  { name: 'Was bet N°', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
+]
+
 export default function Home() {
+  const [data, setData] = useState({})
+
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("data") == null) {
+        setGame(setData)
+        console.log("setdata", data)
+      } else {
+        console.log(localStorage.getItem("data"))
+        setData(JSON.parse(localStorage.getItem("data")))
+      }
+    }
     // Update the document title using the browser API
-  });
+  }, []);
   return (
     <>
       <Head>
@@ -23,6 +40,17 @@ export default function Home() {
       </Head>
       <main className='flex justify-center h-screen items-center'>
         <div>
+          <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            {previousBet.map((item) => (
+              <div key={item.name} className="overflow-hidden rounded-lg bg-neutral-600 px-4 py-5 shadow sm:p-6">
+                <dt className="truncate text-sm font-medium text-gray-800">{item.name}</dt>
+                <div className='grid grid-cols-2 gap-0'>
+                  {item.icon}
+                  <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{data.count}</dd>
+                </div>
+              </div>
+            ))}
+          </dl>
           <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             {stats.map((item) => (
               <div key={item.name} className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
@@ -36,6 +64,7 @@ export default function Home() {
           </dl>
           <div className='flex items-center justify-center mt-10'>
             <button
+              onClick={() => calc(setData)}
               type="button"
               className="hover:scale-110 transition md:transform-none mr-10 inline-flex items-center rounded-md border border-transparent bg-green-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
             >
@@ -43,6 +72,7 @@ export default function Home() {
               Win
             </button>
             <button
+              onClick={() => calc(setData)}
               type="button"
               className="hover:scale-110 transition md:transform-none inline-flex items-center rounded-md border border-transparent bg-red-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
@@ -51,14 +81,15 @@ export default function Home() {
             </button>
           </div>
           <div className='flex items-center justify-center mt-5'>
-          <button
+            <button
+              onClick={() => resetGame(setData)}
               type="button"
               className="hover:scale-110 transition md:transform-none inline-flex items-center rounded-md border border-transparent bg-zinc-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               <ArrowPathRoundedSquareIcon className="-ml-1 mr-3 h-5 w-5" aria-hidden="true" />
               Reset
             </button>
-            </div>
+          </div>
         </div>
       </main>
     </>
