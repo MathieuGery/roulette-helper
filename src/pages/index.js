@@ -53,7 +53,7 @@ export default function Home() {
               <dt className="truncate text-sm font-medium text-gray-800">On previous color</dt>
               <div className='grid grid-cols-2 gap-0'>
                 <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" />
-                <dd className="mt-1 -ml-2 text-3xl font-semibold tracking-tight text-gray-900">{data.previous_color}</dd>
+                <dd className="mt-1 -ml-2 text-3xl font-semibold tracking-tight text-gray-900">{data.colors.at(-1)}</dd>
               </div>
             </div>
             <div key="3" className="overflow-hidden rounded-lg bg-neutral-600 px-4 py-5 shadow sm:p-6">
@@ -77,7 +77,7 @@ export default function Home() {
               <dt className="truncate text-sm font-medium text-gray-800">On previous color</dt>
               <div className='grid grid-cols-2 gap-0'>
                 <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" />
-                <dd className="mt-1 -ml-2 text-3xl font-semibold tracking-tight text-gray-900">{data.color}</dd>
+                <dd className="mt-1 -ml-2 text-3xl font-semibold tracking-tight text-gray-900">{data.colors.at(0)}</dd>
               </div>
             </div>
             <div key="3" className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
