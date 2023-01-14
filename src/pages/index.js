@@ -3,17 +3,11 @@ import { HandThumbUpIcon, HandThumbDownIcon, CurrencyDollarIcon, ForwardIcon, Ar
 import { useEffect, useState } from 'react'
 import { resetGame, setGame, calc } from '../function/function'
 
-const previousBet = [
-  { name: 'Previous Bet', stat: '1', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-  { name: 'On previous color', stat: 'RED', icon: <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-  { name: 'Was bet N°', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-]
-const stats = [
-  { name: 'Bet', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-  { name: 'On color', stat: 'RED', icon: <ForwardIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-  { name: 'Bet N°', stat: '2', icon: <CurrencyDollarIcon className="mt-1 h-9 w-9 text-red-500" aria-hidden="true" /> },
-]
-
+export function caca(data) {
+  if (data.colors !== undefined) {
+    return data?.colors[1]
+  }
+}
 
 export default function Home() {
   const [data, setData] = useState({})
@@ -89,7 +83,7 @@ export default function Home() {
             </div>
           </dl>
           <a className='flex items-center justify-center'>
-            next color: {data.colors[1]}
+            next color: {caca(data)}
           </a>
           <div className='flex items-center justify-center mt-4'>
             <button
