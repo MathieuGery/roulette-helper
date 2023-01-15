@@ -61,7 +61,7 @@ export default function Home() {
           {/* CURRENT BET PART */}
           <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
             <div key="1" className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-              <dt className="truncate text-sm font-medium text-gray-800">Previous Bet</dt>
+              <dt className="truncate text-sm font-medium text-gray-800">Bet</dt>
               <div className='grid grid-cols-2 gap-0'>
                 <CurrencyDollarIcon className="mt-1 h-9 w-9 text-yellow-500" aria-hidden="true" />
                 <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{data.bet_value}</dd>
